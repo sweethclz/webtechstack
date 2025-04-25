@@ -1,0 +1,40 @@
+<html>
+
+<head>
+	<title>01-cdn安装使用element-ui</title>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<!-- 先引入element-ui依赖的vue -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<!-- 再引入组件库 -->
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+	<!--标识vue作用域-->
+	<div id="app">
+		<!--按钮组件-->
+		<el-button @click="showDialog">{{text}}</el-button>
+		<!--对话框组件-->
+		<el-dialog :visible.sync="dialogIsShow" :title="text">
+			<p>我是对话框的内容</p>
+		</el-dialog>
+	</div>
+	<script>
+		var app = new Vue({
+			"el": "#app",
+			"data": {
+				"text": "你好",
+				"dialogIsShow": false,
+			},
+			"methods": {
+				showDialog() {
+					console.log(this);
+					this.dialogIsShow = !this.dialogIsShow;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
