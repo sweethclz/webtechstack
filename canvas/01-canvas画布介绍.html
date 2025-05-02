@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-canvas画布介绍</title>
+    <style type="text/css">
+        canvas{
+            border: solid red 1px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas>
+        你的浏览器不支持canvas（如IE7、IE8，IE9是支持canvas的），请升级浏览器！
+    </canvas>
+    <script type="text/javascript">
+        /*=======canvas开发固定两个步骤=========*/
+        /**
+         * @TODO step1：获取画布dom对象，画布默认宽高：300x150，画布背景默认白色，所以不加边框没法看到画布
+         * Tips1：canvas技术不是所有浏览器都支持（如IE7、IE8，IE9是支持canvas的），在canvas标签内写上提示文本，该提示文本只在浏览器不支持canvas时会显示
+         * Tips2：canvas是行内元素，要想水平居中，需要转为block模式，然后设置margin
+            margin: 0 auto;
+            display: block;
+         * Tips3：设置画布的宽高时，不能使用css的width/height属性，而应该使用canvas标签的width/height的html属性
+         *  css样式的width/height：把canvas里面的像素进行缩放，会影响canvas的画质
+         *  canvas标签的width/height：把canvas整个画布进行缩放，不影响原画质
+         * Tips4：画布上存储的就是一些像素点，所以，浏览器上右键画布，可以将画布保存为图片
+         */
+        let canvas = document.getElementsByTagName("canvas")[0];
+        console.log([canvas])
+        /**
+         * @TODO step2：获取绘图上下文对象，绘图上下文对象默认 填充色fillStyle、描边色strokeStyle都是黑色#00000
+         * Tips4：拿到绘图上下文后，就可以在画布上绘制【线条、矩形、圆弧、文字、图片、视频】等
+         */
+        let ctx = canvas.getContext("2d");
+        console.log(ctx)
+        /*=======canvas开发固定两个步骤=========*/
+    </script>
+</body>
+</html>
