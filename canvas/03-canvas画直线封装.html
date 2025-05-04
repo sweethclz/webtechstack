@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-canvas画直线封装</title>
+    <style type="text/css">
+        *{
+            margin: 0 auto;
+            padding: 0;
+        }
+        canvas{
+            border: solid red 1px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas>
+        你的浏览器不支持canvas（如IE7、IE8，IE9是支持canvas的），请升级浏览器！
+    </canvas>
+    <script type="text/javascript">
+        /**
+         * @TODO 判断obj是否为json对象
+         */
+        function isJson(obj){
+            return (
+                typeof(obj) === "object" &&
+                Object.prototype.toString.call(obj).toLowerCase() === "[object object]"
+            );
+        }
+        /**
+         * @TODO 画直线代码封装
+         */
+        function drawLine(params){
+            if(!isJson(params)){
+                throw "请传入一个对象参数，用来描述画笔信息和绘制信息！"
+            }
+            //传递参数和默认参数进行合并
+            let defaultParams = {
+                strokeStyle: "#000000",
+                needClosePath: true,
+                linePoints: [{x:0,y:0},{x:100,y:100}]
+            }
+            let drawParams = Object.assign({},defaultParams,params);
+            //进行直线绘制
+            ctx.beginPath();
+            //瞄始点
+            ctx.moveTo(drawParams.linePoints[0].x,drawParams.linePoints[0].y);
+            //删除第一个起始点
+            drawParams.linePoints.shift()
+            //瞄中间点
+            for (let point of drawParams.linePoints) {
+                ctx.lineTo(point.x,point.y);
+            }
+            //判断是否要闭合，如果要闭合执行闭合
+            drawParams.needClosePath && ctx.closePath();
+            //设置画笔信息
+            ctx.strokeStyle = drawParams.strokeStyle;
+            ctx.lineCap = drawParams.lineCap;
+            ctx.lineJoin = drawParams.lineJoin;
+            ctx.lineWidth = drawParams.lineWidth;
+            //进行描边连线
+            ctx.stroke();
+        }
+    </script>
+    <script type="text/javascript">
+        /*=======canvas开发固定两个步骤=========*/
+        let canvas = document.getElementsByTagName("canvas")[0];
+        let ctx = canvas.getContext("2d");
+        ctx.canvas.width=window.innerWidth - 10;
+        ctx.canvas.height=window.innerHeight - 10;
+        /*=======canvas开发固定两个步骤=========*/
+        //调用绘制直线的函数
+        drawLine({
+            needClosePath: true,
+            strokeStyle: "#000000",
+            lineCap: "round",
+            lineJoin: "miter",
+            lineWidth: 15,
+            linePoints: [{x:300,y:300},{x:800,y:300},{x:800,y:700},{x:300,y:700}]
+        })
+    </script>
+</body>
+</html>

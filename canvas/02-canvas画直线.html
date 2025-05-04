@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-canvas画直线</title>
+    <style type="text/css">
+        canvas{
+            border: solid red 1px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas>
+        你的浏览器不支持canvas（如IE7、IE8，IE9是支持canvas的），请升级浏览器！
+    </canvas>
+    <script type="text/javascript">
+        /*=======canvas开发固定两个步骤=========*/
+        let canvas = document.getElementsByTagName("canvas")[0];
+        let ctx = canvas.getContext("2d");
+        /*=======canvas开发固定两个步骤=========*/
+        /**
+         * @TODO 绘制直线
+         *  直线：两个点确定一条线
+         *      起始点、终止点
+         */
+        //step1：开始作画
+        ctx.beginPath();
+        //step2：落笔（确定直线的起始点）
+        ctx.moveTo(59,32);
+        //step3：移动画笔到另外一个点（确定直线的终止点）【中间可以移动多次】
+        ctx.lineTo(300,150);
+        ctx.lineTo(200,80);
+        ctx.lineTo(100,99);
+        //step4：闭合路径（从当前点【100,99】回到最开始落笔的那个点【59,32】）
+        ctx.closePath();
+        //step5：将笔的移动路径绘制出来
+        ctx.stroke();
+
+        //绘画过程就是循环step1、2、3、4、5
+    </script>
+</body>
+</html>
