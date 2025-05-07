@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<script>
+			$(() => {
+				var popNotice = function() {
+					//获取用户授权状态
+					if (Notification.permission == "granted") {
+						var notification = new Notification("Hi,Youngxj", {
+							//很明显这是正文
+							body: '可以加你为好友吗？',
+							//很明显这是图标
+							icon: 'https://ww2.sinaimg.cn/large/005BYqpgly1fsnpxsctd7j305k05kwec.jpg'
+
+						});
+						//消息被点击事件
+						notification.onclick = function() {
+							alert('别逗了，我们永远都是朋友');
+							//窗口关闭动作
+							notification.close();
+						};
+						//消息被关闭事件
+						notification.onclose = function() {
+							alert('朋友,告辞');
+							notification.close();
+						};
+						//消息出现错误事件
+						notification.onerror = function() {
+							alert('上帝也不知道发生了什么');
+							notification.close();
+						};
+					}
+				};
+				if (window.Notification) {
+					if (Notification.permission == "granted") {
+						popNotice();
+					} else if (Notification.permission != "denied") {
+						Notification.requestPermission(function(permission) {
+							popNotice();
+						});
+					}
+				} else {
+					alert('浏览器不支持Notification');
+				}
+			})();
+		</script>
+	</body>
+</html>
